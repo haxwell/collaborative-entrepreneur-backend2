@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet author="haxwell" id="v0.0.1-e-1" context="test">
+		<sql dbms="mysql">
+            INSERT INTO user (id, name, phone, email, password, enabled)
+            VALUES (2, 
+            	"testuser1",
+            	"testuser1 phone",
+            	"testuser1@thecollaborativeentrepreneur.org",
+            	"$2a$10$wGcNuV0Kodg7uz6qI/l/1uz1mMcpmAGZqfuZ3JxY9cAeejtYXUbWC",
+            	1);
+            INSERT INTO user (id, name, phone, email, password, enabled)
+            VALUES (3, 
+            	"testuser2",
+            	"testuser2 phone",
+            	"testuser2@thecollaborativeentrepreneur.org",
+            	"$2a$10$wGcNuV0Kodg7uz6qI/l/1uz1mMcpmAGZqfuZ3JxY9cAeejtYXUbWC",
+            	1);
+		</sql>
+	</changeSet>
+
+	<changeSet author="haxwell" id="v0.0.1-e-1a" context="test">
+		<sql dbms="mysql">
+			insert into user_user_role_map (user_id, user_role_id) values (2, 3);
+			insert into user_user_role_map (user_id, user_role_id) values (2, 4);
+			insert into user_user_role_map (user_id, user_role_id) values (3, 2);
+		</sql>
+	</changeSet>
+
+	<changeSet author="haxwell" id="v0.0.1-e-2" context="test">
+		<sql dbms="mysql">
+			insert into idea (id, user_id, name, description, created, last_updated) values (4, 2, "Sell T-shirts @ Denver Black Arts Festival", "Design and print unique shirts to sell at DBAF", NOW() - INTERVAL 1 DAY, NOW() - INTERVAL 1 DAY);
+			insert into idea (id, user_id, name, description, created, last_updated) values (5, 3, "Sell advertising in a mobile app", "My app will attract 1000s of people, so we can show ads to them and make money", NOW() - INTERVAL 1 DAY, NOW() - INTERVAL 1 DAY);			
+		</sql>
+	</changeSet>
+
+	<changeSet author="haxwell" id="v0.0.1-e-3" context="test">
+		<sql dbms="mysql">
+			insert into idea_skill_map (idea_id, skill_id, industry_id, skill_level_id) values (4, 3, null, null);
+			insert into idea_skill_map (idea_id, skill_id, industry_id, skill_level_id) values (4, 6, null, 2);
+			insert into idea_skill_map (idea_id, skill_id, industry_id, skill_level_id) values (5, 2, null, 2);
+		</sql>
+	</changeSet>
+
+	<changeSet author="haxwell" id="v0.0.1-e-4" context="test">
+		<sql dbms="mysql">
+			insert into user_skill_map (user_id, skill_id, industry_id, skill_level_id) values (2, 2, 2, 3);
+		</sql>
+	</changeSet>
+
+</databaseChangeLog>

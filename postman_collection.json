@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "d366889d-45be-4642-8e71-7f1c49d2c3e5",
+		"name": "collaborative-enterpreneur-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"testuser1@collaborativeentrepeneur.org\",\n    \"password\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{http-protocol}}://{{api-url}}/api/login",
+					"protocol": "{{http-protocol}}",
+					"host": [
+						"{{api-url}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/user/{userId}/specific-skills",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

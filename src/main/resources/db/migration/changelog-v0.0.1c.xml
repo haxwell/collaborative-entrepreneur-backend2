@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet author="haxwell" id="v0.0.1-c-1">
+		<createTable tableName="idea" catalogName="collabent_db" >
+			<column name="id" type="BIGINT(20)" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true"/>			
+			</column>
+			<column name="user_id" type="BIGINT(20)">
+                <constraints nullable="false" foreignKeyName="idea_fk1" references="user(id)"/>			
+			</column>
+			<column name="name" type="VARCHAR(128)">
+				<constraints nullable="false"/>			
+			</column>
+			<column name="description" type="VARCHAR(4096)">
+				<constraints nullable="false"/>			
+			</column>
+            <column name="created" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="last_updated" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
+            	<constraints nullable="false"/>
+            </column>
+		</createTable>
+    </changeSet>
+    
+  	<changeSet author="haxwell" id="v0.0.1-d-2a" context="test">
+		<sql dbms="mysql">
+			insert into idea (id, user_id, name, description, created, last_updated) values (1, 1, "Giant ice cream cone mall", "Build a giant mall in a giant ice cream cone.", NOW() - INTERVAL 1 DAY, NOW() - INTERVAL 1 DAY);
+			insert into idea (id, user_id, name, description, created, last_updated) values (2, 1, "Knick knacks for 5x", "Sell knick knacks for 5x cost of materials", NOW() - INTERVAL 1 DAY, NOW() - INTERVAL 1 WEEK);
+			insert into idea (id, user_id, name, description, created, last_updated) values (3, 1, "Open a Car Wash", "There is not a car wash within 3 miles of 80210. Cha ching!", NOW() - INTERVAL 1 DAY, NOW() - INTERVAL 2 WEEK);
+		</sql>
+	</changeSet>
+
+</databaseChangeLog>

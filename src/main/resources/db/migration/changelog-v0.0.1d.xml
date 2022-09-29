@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet author="haxwell" id="v0.0.1-d-2">
+		<createTable tableName="skill" catalogName="collabent_db" >
+			<column name="id" type="BIGINT(20)" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true"/>			
+			</column>
+			<column name="name" type="VARCHAR(128)">
+				<constraints nullable="false"/>			
+			</column>
+		</createTable>
+    </changeSet>
+
+  	<changeSet author="haxwell" id="v0.0.1-d-2a" context="test">
+		<sql dbms="mysql">
+			insert into skill (id, name) values (1, "Marketing");
+			insert into skill (id, name) values (2, "Computer Programming");
+			insert into skill (id, name) values (3, "Project Management");
+			insert into skill (id, name) values (4, "Event Planning");
+			insert into skill (id, name) values (5, "Financial Planning");
+			insert into skill (id, name) values (6, "Graphic Design");
+		</sql>
+	</changeSet>
+
+	<changeSet author="haxwell" id="v0.0.1-d-3">
+		<createTable tableName="industry" catalogName="collabent_db" >
+			<column name="id" type="BIGINT(20)" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true"/>			
+			</column>
+			<column name="name" type="VARCHAR(128)">
+				<constraints nullable="false"/>			
+			</column>
+		</createTable>
+    </changeSet>
+    
+  	<changeSet author="haxwell" id="v0.0.1-d-3a" context="test">
+		<sql dbms="mysql">
+			insert into industry (id, name) values (1, "Insurance");
+			insert into industry (id, name) values (2, "Healthcare");
+			insert into industry (id, name) values (3, "Hospitality");
+			insert into industry (id, name) values (4, "Oil and Gas");
+			insert into industry (id, name) values (5, "Construction");
+			insert into industry (id, name) values (6, "Finance");
+		</sql>
+	</changeSet>
+    
+	<changeSet author="haxwell" id="v0.0.1-d-4">
+		<createTable tableName="skill_level" catalogName="collabent_db" >
+			<column name="id" type="BIGINT(20)" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true"/>			
+			</column>
+			<column name="level" type="TINYINT(1)">
+			</column>
+			<column name="name" type="VARCHAR(128)">
+				<constraints nullable="false"/>			
+			</column>
+		</createTable>
+
+        <sql dbms="mysql">
+            INSERT INTO skill_level (id, level, name) VALUES (1, 1, "Novice");
+            INSERT INTO skill_level (id, level, name) VALUES (2, 2, "Junior");
+            INSERT INTO skill_level (id, level, name) VALUES (3, 3, "Senior");
+            INSERT INTO skill_level (id, level, name) VALUES (4, 4, "Expert");
+        </sql>
+
+    </changeSet>
+
+	<changeSet author="haxwell" id="v0.0.1-d-5">    
+		<createTable tableName="user_skill_map" catalogName="collabent_db" >
+			<column name="user_id" type="BIGINT(20)">
+                <constraints nullable="false" foreignKeyName="user_skill_map_fk1" references="user(id)"/>			
+			</column>
+			<column name="skill_id" type="BIGINT(20)">
+                <constraints nullable="false" foreignKeyName="user_skill_map_fk2" references="skill(id)"/>			
+			</column>
+			<column name="industry_id" type="BIGINT(20)">
+                <constraints nullable="false" foreignKeyName="user_skill_map_fk3" references="industry(id)"/>			
+			</column>
+			<column name="skill_level_id" type="BIGINT(20)">
+                <constraints nullable="false" foreignKeyName="user_skill_map_fk4" references="skill_level(id)"/>			
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet author="haxwell" id="v0.0.1-d-6">    
+		<createTable tableName="user_skill_job_title_map" catalogName="collabent_db" >
+			<column name="id" type="BIGINT(20)" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true"/>			
+			</column>
+			<column name="user_id" type="BIGINT(20)">
+                <constraints nullable="false" foreignKeyName="user_skill_job_title_map_fk1" references="user(id)"/>			
+			</column>
+			<column name="skill_id" type="BIGINT(20)">
+                <constraints nullable="false" foreignKeyName="user_skill_job_title_map_fk2" references="skill(id)"/>			
+			</column>
+			<column name="job_title" type="VARCHAR(128)">
+				<constraints nullable="false"/>			
+			</column>
+		</createTable>
+	</changeSet>
+	
+	<changeSet author="haxwell" id="v0.0.1-d-7">
+		<createTable tableName="idea_skill_map" catalogName="collabent_db" >
+			<column name="idea_id" type="BIGINT(20)">
+                <constraints nullable="false" foreignKeyName="idea_skill_map_fk1" references="idea(id)"/>			
+			</column>
+			<column name="skill_id" type="BIGINT(20)">
+                <constraints nullable="false" foreignKeyName="idea_skill_map_fk2" references="skill(id)"/>			
+			</column>
+			<column name="industry_id" type="BIGINT(20)">
+                <constraints nullable="true" foreignKeyName="idea_skill_map_fk3" references="industry(id)"/>			
+			</column>
+			<column name="skill_level_id" type="BIGINT(20)">
+                <constraints nullable="true" foreignKeyName="idea_skill_map_fk4" references="skill_level(id)"/>			
+			</column>
+		</createTable>
+	</changeSet>
+
+</databaseChangeLog>
